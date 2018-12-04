@@ -36,5 +36,16 @@ module.exports = (sequelize, DataTypes) => {
             underscored: false
         });
 
+
+
+file.associate = models => {
+            file.belongsTo(models.user, {
+                as: 'user',
+                foreignKey: 'file'
+            });
+        };
+    
+
+
     return file;
 };
