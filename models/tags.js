@@ -38,15 +38,11 @@ module.exports = (sequelize, DataTypes) => {
             version: false
         });
 
-<<<<<<< Updated upstream
-        tags.associate = models => {
-            tags.hasMany(models.file, {
-=======
     tags.associate = models => {
-        tags.belongsTo(models.Product, {
->>>>>>> Stashed changes
-            as: 'file',
-            foreignKey: 'tags'
+        tags.belongsTo(models.file, {
+            as: 'files',
+            throught: 'file_tag',
+            foreignKey: 'tag'
         });
     };
 
