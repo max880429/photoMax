@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-    let Category = sequelize.define('tags', {
+    let tags = sequelize.define('tags', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -38,12 +38,12 @@ module.exports = (sequelize, DataTypes) => {
             version: false
         });
 
-    Category.associate = models => {
-        Category.hasMany(models.Product, {
+        tags.associate = models => {
+            tags.hasMany(models.file, {
             as: 'file',
             foreignKey: 'tag'
         });
     };
 
-    return Category;
+    return tags;
 };

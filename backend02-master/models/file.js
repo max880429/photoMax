@@ -2,7 +2,7 @@
 let fileUtils = require('../modules/fileUtils');
 
 module.exports = (sequelize, DataTypes) => {
-    var File = sequelize.define("file", {
+    var file = sequelize.define("file", {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             autoIncrement: true,
@@ -36,5 +36,5 @@ module.exports = (sequelize, DataTypes) => {
             underscored: false
         });
 
-    return File;
+    return file;
 };

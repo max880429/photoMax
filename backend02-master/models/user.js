@@ -3,7 +3,7 @@
 var crypto = require('crypto');
 
 module.exports = (sequelize, DataTypes) => {
-    let User = sequelize.define('user', {
+    let user = sequelize.define('user', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         // default values for dates => current time
         //birthday: {
-            //type: DataTypes.DATE,
-            //allowNull: false
+        //type: DataTypes.DATE,
+        //allowNull: false
         //},
     }, {
             // don't add the timestamp attributes (updatedAt, createdAt)
@@ -65,12 +65,12 @@ module.exports = (sequelize, DataTypes) => {
             version: false
         });
 
-    User.associate = models => {
+    user.associate = models => {
         //asociar los roles
-        User.belongsTo(models.File, {
+        user.belongsTo(models.file, {
             foreignKey: 'photo'
         });
     };
 
-    return User;
+    return user;
 };
