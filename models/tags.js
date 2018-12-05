@@ -39,9 +39,9 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     tags.associate = models => {
-        tags.belongsTo(models.file, {
+        tags.belongsToMany(models.file, {
             as: 'files',
-            throught: 'file_tag',
+            through: 'file_tag',
             foreignKey: 'tag'
         });
     };

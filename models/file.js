@@ -37,9 +37,9 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     file.associate = models => {
-        file.belongsTo(models.user, {
+        file.belongsToMany(models.tags, {
             as: 'tags',
-            throught: 'file_tag',
+            through: 'file_tag',
             foreignKey: 'file'
         });
     };
