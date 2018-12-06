@@ -14,9 +14,10 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/save', (req, res, next) => {
+  console.log(req.body);
   object.save([
     'email', 'password', 'firstName', 'lastName', 'birthday'
-  ], req.query, 'User')
+  ], req.query, 'user')
     .then(response => {
       res.json({ status: true, content: response });
     })
@@ -28,9 +29,8 @@ router.post('/save', (req, res, next) => {
 router.put('/save/:id', passport.authenticate('bearer', { session: false }), (req, res, next) => {
   let values = req.query;
   values.id = req.params.id;
-
   object.update([
-    'email', 'password', 'firstName', 'lastName', 'birthday'
+    'email', 'token', 'password', 'firstName', 'lastName', 'birthday'
   ], values, 'User')
     .then(response => {
       res.json({ status: true, content: response });

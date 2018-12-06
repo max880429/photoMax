@@ -39,10 +39,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         // default values for dates => current time
-        //birthday: {
-        //type: DataTypes.DATE,
-        //allowNull: false
-        //},
+        birthday: {
+        type: DataTypes.DATE,
+        allowNull: true
+        },
     }, {
             // don't add the timestamp attributes (updatedAt, createdAt)
             timestamps: true,
