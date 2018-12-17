@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var object = require('../modules/objectsAndTypes');
-var crypto = require('crypto');
+let express = require('express'),
+  router = express.Router(),
+  object = require('../modules/objectsAndTypes'),
+  crypto = require('crypto');
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', passport.authenticate('bearer', { session: false }), (req, res, next) => {
   object.get('User', req.params.id, 1)
     .then(response => {
       res.json({ status: true, content: response });
@@ -15,7 +15,7 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/save', (req, res, next) => {
   object.save([
-    'email', 'password', 'firstName', 'lastName', 'birthday'
+    'email', 'password', 'firstName', 'lastName'
   ], req.query, 'User')
     .then(response => {
       res.json({ status: true, content: response });
@@ -30,7 +30,7 @@ router.put('/save/:id', passport.authenticate('bearer', { session: false }), (re
   values.id = req.params.id;
 
   object.update([
-    'email', 'password', 'firstName', 'lastName', 'birthday'
+    'email', 'password', 'firstName', 'lastName'
   ], values, 'User')
     .then(response => {
       res.json({ status: true, content: response });
@@ -40,7 +40,7 @@ router.put('/save/:id', passport.authenticate('bearer', { session: false }), (re
     });
 });
 
-router.delete('/delete/:id', (req, res, next) => {
+router.delete('/delete/:id', passport.authenticate('bearer', { session: false }), (req, res, next) => {
   object.delete('User', req.params.id)
     .then(response => {
       res.json({ status: true, content: response });

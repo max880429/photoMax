@@ -2,47 +2,47 @@
 let fileUtils = require('../modules/fileUtils');
 
 module.exports = (sequelize, DataTypes) => {
-    var file = sequelize.define("file", {
-        id: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            autoIncrement: true,
-            primaryKey: true,
-            allowNull: false
-        },
-        filename: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        originalName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        path: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: 'path',
-            get() {
-                return fileUtils.getPublicURL(this.getDataValue('path'));
-            }
-        },
-        mime: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        size: DataTypes.INTEGER.UNSIGNED
-    }, {
-            tableName: 'file',
-            freezeTableName: true,
-            underscored: false
-        });
+  var File = sequelize.define("File", {
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false
+    },
+    filename: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    originalName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    path: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: 'path',
+      get() {
+        return fileUtils.getPublicURL(this.getDataValue('path'));
+      }
+    },
+    mime: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    size: DataTypes.INTEGER.UNSIGNED
+  }, {
+      tableName: 'file',
+      freezeTableName: true,
+      underscored: false
+    });
 
-    file.associate = models => {
-        file.belongsTo(models.user, {
-            as: 'tags',
-            throught: 'file_tag',
-            foreignKey: 'file'
-        });
-    };
+  File.associate = models => {
+    File.belongsToMany(models.Tag, {
+      as: 'Tags',
+      through: models.FileTag,
+      foreignKey: 'file'
+    });
+  };
 
-    return file;
+  return File;
 };

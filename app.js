@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var tagsRouter = require('./routes/tags');
 var userRouter = require('./routes/user');
 var fileRouter = require('./routes/file');
+var fileTaggingRouter = require('./routes/fileTagging');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/tags', tagsRouter);
 app.use('/file', fileRouter);
+app.use('/file', fileTaggingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
