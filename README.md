@@ -1,1 +1,1 @@
-# photoMax
+# Proyecto PhotoMax
